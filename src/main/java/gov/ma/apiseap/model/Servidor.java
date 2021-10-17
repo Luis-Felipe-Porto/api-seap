@@ -2,18 +2,34 @@ package gov.ma.apiseap.model;
 
 import java.time.LocalDate;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.Length;
+import org.springframework.format.annotation.DateTimeFormat;
+
+
+@Entity
 public class Servidor {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+    @NotNull @NotEmpty @Length(min = 3, max = 400)
     private String nome;
+    @NotNull @NotEmpty @Length(max = 30)
     private String matricula;
+    @DateTimeFormat(pattern="dd/MM/yyyy")
     private LocalDate dataCadastro;
-    private Lotacao lotacao;
-    
-    public Servidor(String nome, String matricula, LocalDate dataCadastro, Lotacao lotacao) {
-        this.nome = nome;
-        this.matricula = matricula;
-        this.dataCadastro = dataCadastro;
-        this.lotacao = lotacao;
-    }
+    @NotNull
+    @ManyToOne(cascade=CascadeType.ALL)
+    private Lotacao tipoLotacao;
+
     public String getNome() {
         return nome;
     }
@@ -23,7 +39,18 @@ public class Servidor {
     public LocalDate getDataCadastro() {
         return dataCadastro;
     }
-    public Lotacao getLotacao() {
-        return lotacao;
+    public void setTipoLotacao(Lotacao tipoLotacao) {
+        this.tipoLotacao = tipoLotacao;
     }
+    public Integer getId() {
+        return id;
+    }
+    public void setId(Integer id) {
+        this.id = id;
+    }
+    
+    public Lotacao getTipoLotacao() {
+        return tipoLotacao;
+    }
+    
 }

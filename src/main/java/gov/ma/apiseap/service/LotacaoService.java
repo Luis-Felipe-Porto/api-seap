@@ -1,25 +1,36 @@
 package gov.ma.apiseap.service;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import gov.ma.apiseap.model.Lotacao;
+import gov.ma.apiseap.repository.LotacaoRepository;
 
 @Service
 public class LotacaoService {
-    private List<Lotacao> lotacaoRepository = new ArrayList<>();
+    @Autowired
+    private LotacaoRepository lotacaoRepository;
     
-    public void salva(Lotacao lotacao){
-        this.lotacaoRepository.add(lotacao);
+    @Transactional
+    public Lotacao salva(Lotacao lotacao){
+        return this.lotacaoRepository.save(lotacao);
     }
-    public Lotacao buscaPor(String nome){
-        for (Lotacao lotacao : lotacaoRepository) {
-            if(lotacao.getNome().equals(nome)){
-                return lotacao;
-            }
-        }
-        return null;
+    public List<Lotacao> buscaPor(String nome){    
+        return this.lotacaoRepository.findByDescricao(nome);
+    }
+    public Page<Lotacao> buscaPor(String nome, Pageable pageable){
+        return this.lotacaoRepository.findByDescricao(nome, pageable);
+    }
+    public Page<Lotacao> buscaCom(Pageable pageable){
+        return this.lotacaoRepository.findAll(pageable);
+    }
+    public Optional<Lotacao> buscaPor(Integer id) {
+        return this.lotacaoRepository.findById(id);
     }
 }
