@@ -11,4 +11,5 @@ import gov.ma.apiseap.model.Servidor;
 public interface ServidorRepository extends JpaRepository<Servidor,Integer>{
     Optional<Servidor> findByMatricula(String matricula); 
     List<Servidor> findByNome(String nome);
+
 }

@@ -29,6 +29,18 @@ public class Servidor {
     @NotNull
     @ManyToOne(cascade=CascadeType.ALL)
     private Lotacao tipoLotacao;
+    
+    public Servidor(@NotNull @NotEmpty @Length(min = 3, max = 400) String nome,
+            @NotNull @NotEmpty @Length(max = 30) String matricula, LocalDate dataCadastro,
+            @NotNull Lotacao tipoLotacao) {
+        this.nome = nome;
+        this.matricula = matricula;
+        this.dataCadastro = dataCadastro;
+        this.tipoLotacao = tipoLotacao;
+    }
+    
+    public Servidor() {
+    }
 
     public String getNome() {
         return nome;
@@ -52,5 +64,5 @@ public class Servidor {
     public Lotacao getTipoLotacao() {
         return tipoLotacao;
     }
-    
+
 }

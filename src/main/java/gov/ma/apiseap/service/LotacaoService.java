@@ -22,7 +22,7 @@ public class LotacaoService {
         return this.lotacaoRepository.save(lotacao);
     }
     public List<Lotacao> buscaPor(String nome){    
-        return this.lotacaoRepository.findByDescricao(nome);
+        return this.lotacaoRepository.findByDescricaoLike(nome);
     }
     public Page<Lotacao> buscaPor(String nome, Pageable pageable){
         return this.lotacaoRepository.findByDescricao(nome, pageable);
@@ -31,6 +31,13 @@ public class LotacaoService {
         return this.lotacaoRepository.findAll(pageable);
     }
     public Optional<Lotacao> buscaPor(Integer id) {
-        return this.lotacaoRepository.findById(id);
+        if(id > 0){
+            return this.lotacaoRepository.findById(id);
+        }
+        return Optional.empty();     
     }
+    @Transactional
+	public void deletePor(Integer id) {
+		this.lotacaoRepository.deleteById(id);
+	}
 }

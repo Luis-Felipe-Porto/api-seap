@@ -1,5 +1,6 @@
 package gov.ma.apiseap.model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 import javax.persistence.Entity;
@@ -13,7 +14,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.lang.NonNull;
 
 @Entity
-public class Lotacao {
+public class Lotacao implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -22,6 +23,15 @@ public class Lotacao {
     @DateTimeFormat(pattern="dd/MM/yyyy")
     private LocalDate dataDeCadastro;
 
+    
+    public Lotacao(@NotBlank @Length(max = 200) String descricao, LocalDate dataDeCadastro) {
+        this.descricao = descricao;
+        this.dataDeCadastro = dataDeCadastro;
+    }
+    
+    public Lotacao() {
+    }
+
     public String getDescricao() {
         return descricao;
     }
@@ -29,7 +39,10 @@ public class Lotacao {
         return dataDeCadastro;
     }
     public void setDescricao(String descricao) {
-        this.descricao = descricao.toUpperCase();
+        this.descricao = descricao;
     }
-  
+
+    public Integer getId() {
+        return id;
+    }  
 }

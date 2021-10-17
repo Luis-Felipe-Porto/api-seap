@@ -30,4 +30,14 @@ public class ServidorService {
         return listServidor.stream().map(Servidor::getTipoLotacao)
         .collect(Collectors.toList());       
     }
+    public Optional<Servidor> buscaPor(Integer id) {
+        if(id > 0){
+            return this.servidorRepository.findById(id);
+        }
+        return Optional.empty();     
+    }
+    @Transactional
+	public void deletePor(Integer id) {
+		this.servidorRepository.deleteById(id);
+	}
 }

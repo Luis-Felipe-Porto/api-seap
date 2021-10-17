@@ -13,6 +13,6 @@ import gov.ma.apiseap.model.Lotacao;
 
 @Repository
 public interface LotacaoRepository extends JpaRepository<Lotacao,Integer>{
-    List<Lotacao> findByDescricao(String descricao);
+    List<Lotacao> findByDescricaoLike(String descricao);
     Page<Lotacao> findByDescricao(String descricao,Pageable pageable);
 }
