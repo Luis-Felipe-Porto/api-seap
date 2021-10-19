@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import gov.ma.apiseap.exception.MatriculaInvalidaException;
 import gov.ma.apiseap.model.Lotacao;
 import gov.ma.apiseap.model.Servidor;
 import gov.ma.apiseap.service.ServidorService;
@@ -28,10 +29,10 @@ public class ServidorController {
     @Autowired
     private ServidorService servidorService;
     @PostMapping
-    public ResponseEntity<Servidor> cadastrarServidor(@RequestBody @Valid Servidor servidor){
+    public ResponseEntity<Servidor> cadastrarServidor(@RequestBody @Valid Servidor servidor) throws MatriculaInvalidaException{
         return ResponseEntity.status(HttpStatus.CREATED).body(this.servidorService.salva(servidor));
     }
-    @GetMapping("/{matricula}")
+    @GetMapping("matricula/{matricula}")
     public ResponseEntity<Servidor> buscaServidorPor(@PathVariable String matricula){
         Optional<Servidor> servidor = this.servidorService.buscaPor(matricula);
         if(servidor.isPresent()){
@@ -56,4 +57,13 @@ public class ServidorController {
 		}
 		return ResponseEntity.notFound().build();
 	}
+    @GetMapping("/{id}")
+    public ResponseEntity<Servidor> buscaServidoroPor(@PathVariable Integer id){
+        Optional<Servidor> optional = this.servidorService.buscaPor(id);
+        if (optional.isPresent()) {
+            return ResponseEntity.ok(optional.get());
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
 }

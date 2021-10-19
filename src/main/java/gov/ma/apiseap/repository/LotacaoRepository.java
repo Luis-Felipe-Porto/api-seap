@@ -1,8 +1,6 @@
 package gov.ma.apiseap.repository;
 
 
-import java.util.List;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -13,6 +11,6 @@ import gov.ma.apiseap.model.Lotacao;
 
 @Repository
 public interface LotacaoRepository extends JpaRepository<Lotacao,Integer>{
-    List<Lotacao> findByDescricaoLike(String descricao);
-    Page<Lotacao> findByDescricao(String descricao,Pageable pageable);
+    
+    Page<Lotacao> findByDescricaoContainingIgnoreCase(String descricao,Pageable pageable);
 }

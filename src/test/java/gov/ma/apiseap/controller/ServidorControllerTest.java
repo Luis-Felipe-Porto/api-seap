@@ -43,7 +43,7 @@ public class ServidorControllerTest {
     @Test
     public void status200quandoBuscarServidorMatricula(){
         ResponseEntity<Servidor> resposta =
-        testRestTemplate.exchange("/servidor/{matricula}",HttpMethod.GET,null, Servidor.class,servidor.getMatricula());
+        testRestTemplate.exchange("/servidor/matricula/{matricula}",HttpMethod.GET,null, Servidor.class,servidor.getMatricula());
         assertEquals(HttpStatus.OK, resposta.getStatusCode());
         assertEquals(resposta.getHeaders().getContentType(),MediaType.parseMediaType("application/json"));
         assertTrue(resposta.getBody().getMatricula().equals(servidor.getMatricula()));
@@ -52,7 +52,7 @@ public class ServidorControllerTest {
     public void staus404QuandoNaoEncontrarServidor(){
         String matriculaInexitente = "MA2007";
         ResponseEntity<Servidor> resposta =
-        testRestTemplate.exchange("/servidor/{matricula}",HttpMethod.GET,null, Servidor.class,matriculaInexitente);
+        testRestTemplate.exchange("/servidor/matricula/{matricula}",HttpMethod.GET,null, Servidor.class,matriculaInexitente);
         assertEquals(HttpStatus.NOT_FOUND, resposta.getStatusCode());
     }
 

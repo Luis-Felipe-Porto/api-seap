@@ -1,6 +1,5 @@
 package gov.ma.apiseap.service;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,11 +20,8 @@ public class LotacaoService {
     public Lotacao salva(Lotacao lotacao){
         return this.lotacaoRepository.save(lotacao);
     }
-    public List<Lotacao> buscaPor(String nome){    
-        return this.lotacaoRepository.findByDescricaoLike(nome);
-    }
-    public Page<Lotacao> buscaPor(String nome, Pageable pageable){
-        return this.lotacaoRepository.findByDescricao(nome, pageable);
+    public Page<Lotacao> buscaPor(String descricao, Pageable pageable){
+        return this.lotacaoRepository.findByDescricaoContainingIgnoreCase(descricao, pageable);
     }
     public Page<Lotacao> buscaCom(Pageable pageable){
         return this.lotacaoRepository.findAll(pageable);

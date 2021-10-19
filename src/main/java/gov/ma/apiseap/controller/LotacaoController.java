@@ -8,7 +8,6 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
@@ -33,19 +32,19 @@ public class LotacaoController {
     private LotacaoService lotacaoService;
 
     @PostMapping
-    public ResponseEntity<Lotacao> cadastrarLotacao(@Valid @RequestBody Lotacao lotacao){
+    public ResponseEntity<Lotacao> cadastrarLotacao(@RequestBody @Valid Lotacao lotacao){
         return ResponseEntity.status(HttpStatus.CREATED).body(this.lotacaoService.salva(lotacao));
     }
     @GetMapping()
     public Page<Lotacao> lista(
-        @RequestParam(required = false) String nome,
+        @RequestParam(required = false) String descricao,
         @PageableDefault(sort = "id", direction = Sort.Direction.ASC, page = 0, size = 5)
         Pageable paginacao){
-            if(nome == null){
+            if(descricao == null){
                 Page<Lotacao> pageLotacao = this.lotacaoService.buscaCom(paginacao);
                 return pageLotacao;
             }else{
-                Page<Lotacao> pageLotacaoSemNome = this.lotacaoService.buscaPor(nome,paginacao);
+                Page<Lotacao> pageLotacaoSemNome = this.lotacaoService.buscaPor(descricao,paginacao);
                 return pageLotacaoSemNome;
             }
     }
@@ -69,6 +68,5 @@ public class LotacaoController {
 		}
 		return ResponseEntity.notFound().build();
 	}
-
 
 }
