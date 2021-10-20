@@ -76,8 +76,9 @@ A documentação foi feita com a ferramenta swagger e pode ser acesada pelo link
  com a ferramenta actuator para verificação do estado da api o <strong>Actuator</strong></p>
  
  ### Actuator
- Para acessar basta executar a aplicao secundaria de [Monitoramento]()
- em: http://localhost:8090/
+ Para acessar basta executar a aplicao secundaria:
+  - [Monitoramento](https://github.com/Luis-Felipe-Porto/monitor-seap)
+  - http://localhost:8090/
  <h1 >
   <img alt="actuator" src="https://github.com/Luis-Felipe-Porto/Luis-Felipe-Porto/blob/master/assets/actuator.PNG"/>
 </h1>
