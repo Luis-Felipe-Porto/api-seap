@@ -4,7 +4,7 @@
 # Sobre o projeto
 
 <p>Projeto como teste para vaga de desenvolvedor java</br>
-contrução de uma
+construção de uma
 api com cadastro de servidores e Lotacão</p>
 <h1 align="center">
   <img alt="estrutura" src="https://github.com/Luis-Felipe-Porto/Luis-Felipe-Porto/blob/master/assets/estrutura.PNG" width="550px"/>
